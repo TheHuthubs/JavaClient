@@ -8,7 +8,8 @@ import java.util.Scanner;
 /**
  * Created by eldadyaakobi on 9/28/17.
  */
-public class LightLeds {
+public class LightLeds implements ILightLeds {
+
 
     private static final String HOST = "127.0.0.1";
     private static final int PORT = 6969;
