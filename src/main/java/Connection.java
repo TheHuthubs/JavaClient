@@ -1,29 +1,32 @@
+import java.io.IOException;
 import java.net.Socket;
 
 /**
  * Created by eldadyaakobi on 9/28/17.
  */
-public class Connection {
+public class Connection implements IConnection {
 
-    private Socket socket = null;
+
     private String host;
     private int port;
-
+    private Socket socket;
 
     public Connection(String host, int port) {
         this.host = host;
         this.port = port;
     }
 
-    public void connectToServer() {
-
+    public void openSocket() {
         try {
-            socket = new Socket(host, port);
+            System.out.println("[connecting to socket...]");
+            this.socket = new Socket(host, port);
 
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IOException e) {
+            System.out.println("Unable to connect to socket, please verify that server is up...");
         }
+    }
+
+    public Socket getSocket() {
+        return this.socket;
     }
 }
