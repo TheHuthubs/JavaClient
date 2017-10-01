@@ -6,14 +6,11 @@ import java.net.UnknownHostException;
  */
 public class LedApp {
 
-    IConnection connection = null;
-
     public LedApp() {
-        connection = new Connection()
-
+        LightLeds lightLeds = new LightLeds();
     }
 
-    public static void main(String[] args) throws UnknownHostException, IOException, ClassNotFoundException {
+    public static void main(String[] args) {
 
         LedApp app = new LedApp();
 

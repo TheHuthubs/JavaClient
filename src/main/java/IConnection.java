@@ -3,6 +3,6 @@
  */
 public interface IConnection {
 
-    void connectToServer();
+    Connection connectToServer(String host, int port);
 
 }

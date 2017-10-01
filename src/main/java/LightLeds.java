@@ -15,6 +15,17 @@ public class LightLeds {
 
     private Socket socket = null;
 
+    public LightLeds() {
+        try {
+            createClient();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
     // make connection to ip and port
     private void socketConnect(String ip, int port) throws UnknownHostException, IOException {
 
@@ -50,16 +61,14 @@ public class LightLeds {
         return socket;
     }
 
-    public static void main(String[] args) throws UnknownHostException, IOException, ClassNotFoundException {
-
-        LightLeds client = new LightLeds();
+    public void createClient() throws UnknownHostException, IOException, ClassNotFoundException {
 
         // TCP connection
         String ip = "127.0.0.1";
         int port = 6969;
 
 
-        client.socketConnect(ip, port);
+        this.socketConnect(ip, port);
 
         System.out.println("How many leds would you like to light ?\n");
 
@@ -69,7 +78,7 @@ public class LightLeds {
         int number = input.nextInt();
 
         System.out.println("Sending: " + number);
-        String returnedMessage = client.echo(number);
+        String returnedMessage = this.echo(number);
         System.out.println("receiving: " +  returnedMessage);
 
     }

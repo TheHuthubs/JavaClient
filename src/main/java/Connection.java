@@ -3,7 +3,7 @@ import java.net.Socket;
 /**
  * Created by eldadyaakobi on 9/28/17.
  */
-public class Connection implements IConnection{
+public class Connection {
 
     private Socket socket = null;
     private String host;
