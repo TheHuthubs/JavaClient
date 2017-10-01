@@ -32,17 +32,20 @@ public class LightLeds {
         connection = new Connection(HOST, PORT);
         connection.openSocket();
 
-        System.out.println("How many leds would you like to light ?\n");
+        System.out.println("How many LEDs would you like to light ?\n");
 
         // receive the number of leds to light from the user
         Scanner input = new Scanner(System.in);
         int number = input.nextInt();
 
-        // Send message to the server and receive an ack
-        System.out.println("Sending: You would like to light " + number + " Leds");
-        String returnedMessage = this.sendMessageToServer(number);
-        System.out.println("receiving: " +  returnedMessage);
-
+        if (numOfLEDsValidator(number)) {
+            // Send message to the server and receive an ack
+            System.out.println("Sending: You would like to light " + number + " Leds");
+            String returnedMessage = this.sendMessageToServer(number);
+            System.out.println("receiving: " + returnedMessage);
+        } else {
+            System.out.println("This is a wrong input");
+        }
     }
 
     public String sendMessageToServer(int message) {
@@ -66,4 +69,9 @@ public class LightLeds {
 
         return null;
     }
+
+    private boolean numOfLEDsValidator(int num) { // Todo: fix this validator to alert if not number
+        return num > 0;
+    }
+
 }
