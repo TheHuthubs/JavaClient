@@ -2,9 +2,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.net.ConnectException;
-import java.net.Socket;
-import java.net.UnknownHostException;
 import java.util.Scanner;
 
 
@@ -13,7 +10,10 @@ import java.util.Scanner;
  */
 public class LightLeds {
 
-    private Socket socket = null;
+    private static final String HOST = "127.0.0.1";
+    private static final int PORT = 6969;
+
+    Connection connection = null;
 
     public LightLeds() {
         try {
@@ -26,60 +26,44 @@ public class LightLeds {
         }
     }
 
-    // make connection to ip and port
-    private void socketConnect(String ip, int port) throws UnknownHostException, IOException {
 
-        System.out.println("[connecting to socket...]");
-        this.socket = new Socket(ip, port);
+    public void createClient() throws IOException, ClassNotFoundException {
+        // creating TCP connection with the server
+        connection = new Connection(HOST, PORT);
+        connection.openSocket();
+
+        System.out.println("How many leds would you like to light ?\n");
+
+        // receive the number of leds to light from the user
+        Scanner input = new Scanner(System.in);
+        int number = input.nextInt();
+
+        // Send message to the server and receive an ack
+        System.out.println("Sending: You would like to light " + number + " Leds");
+        String returnedMessage = this.sendMessageToServer(number);
+        System.out.println("receiving: " +  returnedMessage);
+
     }
 
-    public String echo(int message) {
+    public String sendMessageToServer(int message) {
         try {
 
-            PrintWriter out = new PrintWriter(getSocket().getOutputStream(), true);
-            BufferedReader in = new BufferedReader(new InputStreamReader(getSocket().getInputStream()));
+            PrintWriter out = new PrintWriter(connection.getSocket().getOutputStream(), true);
+            BufferedReader in = new BufferedReader(new InputStreamReader(connection.getSocket().getInputStream()));
 
             out.println(message);
             String returnedString = in.readLine();
 
             in.close();
             out.close();
-            getSocket().close();
-
+            connection.getSocket().close();
 
             return returnedString;
-
 
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         return null;
-    }
-
-    public Socket getSocket() {
-        return socket;
-    }
-
-    public void createClient() throws UnknownHostException, IOException, ClassNotFoundException {
-
-        // TCP connection
-        String ip = "127.0.0.1";
-        int port = 6969;
-
-
-        this.socketConnect(ip, port);
-
-        System.out.println("How many leds would you like to light ?\n");
-
-        Scanner input = new Scanner(System.in);
-//        String number = input.next();
-//        String message = "I want to light " + number + " Leds";
-        int number = input.nextInt();
-
-        System.out.println("Sending: " + number);
-        String returnedMessage = this.echo(number);
-        System.out.println("receiving: " +  returnedMessage);
-
     }
 }
