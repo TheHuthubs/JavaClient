@@ -12,9 +12,9 @@ public class MainFrame implements ActionListener
     TextField text = new TextField(20);
     public void createMainFrame() {
 
-        JFrame frame = new JFrame("Welcome to Arduino led sever application");
-        JLabel mainLable = new JLabel("Arduino led server application");
-        JLabel commandLable  = new JLabel("What do you like Arduino to do for you, bitch? :");
+        JFrame frame = new JFrame("Welcome to Arduino LED lighting application");
+        JLabel mainLable = new JLabel("Arduino LED server application");
+        JLabel commandLable  = new JLabel("How many LEDs would you like to light, bitch? :");
         Font mainLableFont = new Font("Courier", Font.BOLD ,40);
         Font commandLineFont = new Font("Courier", Font.BOLD,25);
         JPanel buttonPanel = new JPanel(new GridBagLayout());
@@ -55,7 +55,7 @@ public class MainFrame implements ActionListener
 
         // Let's add some components to the panel
 
-        // adding command line text lable
+        // adding command line text label
         constraints.gridx = 0;
         constraints.gridy = 0;
         buttonPanel.add(mainLable,constraints);
@@ -81,6 +81,7 @@ public class MainFrame implements ActionListener
 
         public void actionPerformed(ActionEvent e) {
             // todo: write the code which send the command to the server
-            System.out.println("Sending to arduino ");        }
+            System.out.println("Sending to arduino ");
+        }
 
 }
