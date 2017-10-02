@@ -1,13 +1,11 @@
+import graphicInterface.MainFrame;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
-
-/**
- * Created by eldadyaakobi on 9/28/17.
- */
 public class LightLeds implements ILightLeds {
 
 
@@ -18,6 +16,9 @@ public class LightLeds implements ILightLeds {
 
     public LightLeds() {
         try {
+            MainFrame mainFrame = new MainFrame();
+            mainFrame.createMainFrame();
+
             createClient();
 
         } catch (IOException e) {
