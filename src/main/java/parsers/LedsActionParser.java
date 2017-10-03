@@ -7,6 +7,7 @@ import java.awt.*;
 
 public class LedsActionParser
 {
+
     public Integer getLedNumberToTurnOn(JTextField ledNumberToTurnOnInput)
     {
 
