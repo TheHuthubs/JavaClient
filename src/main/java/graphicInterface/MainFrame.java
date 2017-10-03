@@ -1,5 +1,6 @@
 package graphicInterface;
 
+import LedActions.LightLeds;
 import parsers.LedsActionParser;
 
 import javax.swing.*;
@@ -7,6 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.font.TextAttribute;
+import java.io.IOException;
 import java.util.Map;
 
 public class MainFrame extends LedsActionParser implements ActionListener
@@ -14,6 +16,13 @@ public class MainFrame extends LedsActionParser implements ActionListener
     public JTextField commandTextField = new JTextField(15);
 
     TextField text = new TextField(20);
+    private LightLeds lightLeds = new LightLeds();
+    private int ledToLight;
+
+    public MainFrame() {
+        this.createMainFrame();
+    }
+
     public void createMainFrame() {
 
         JFrame frame = new JFrame("Welcome to Arduino led sever application");
@@ -84,7 +93,26 @@ public class MainFrame extends LedsActionParser implements ActionListener
     }
 
         public void actionPerformed(ActionEvent e) {
-            // todo: write the code which send the command to the server
-            getLedNumberToTurnOn(commandTextField);
+            lightLeds.setNumberOfLedsToLight(getLedNumberToTurnOn(commandTextField));
+            try {
+                lightLeds.createClient();
+            } catch (IOException e1) {
+                System.out.println("The mother fucker is not working");
+            } catch (ClassNotFoundException e1) {
+                e1.printStackTrace();
+            } catch (NullPointerException p) {
+                System.out.println("pllllll");
+            }
+
+        }
+
+    public int getLedToLight() {
+        return ledToLight;
     }
+
+    public void setLedToLight(int ledToLight) {
+        this.ledToLight = ledToLight;
+    }
+
+
 }

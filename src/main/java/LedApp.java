@@ -1,3 +1,5 @@
+import graphicInterface.MainFrame;
+
 import java.io.IOException;
 import java.net.UnknownHostException;
 
@@ -7,7 +9,7 @@ import java.net.UnknownHostException;
 public class LedApp {
 
     public LedApp() {
-        LightLeds lightLeds = new LightLeds();
+        MainFrame mainFrame = new MainFrame();
     }
 
     public static void main(String[] args) {
