@@ -15,7 +15,6 @@ public class MainFrame extends LedsActionParser implements ActionListener
 {
     public JTextField commandTextField = new JTextField(15);
 
-    TextField text = new TextField(20);
     private LightLeds lightLeds = new LightLeds();
     private int ledToLight;
 
@@ -92,18 +91,20 @@ public class MainFrame extends LedsActionParser implements ActionListener
 
     }
 
-        public void actionPerformed(ActionEvent e) {
+        public void actionPerformed(ActionEvent actionEvent) {
             lightLeds.setNumberOfLedsToLight(getLedNumberToTurnOn(commandTextField));
             try {
                 lightLeds.createClient();
-            } catch (IOException e1) {
-                System.out.println("The mother fucker is not working");
-            } catch (ClassNotFoundException e1) {
-                e1.printStackTrace();
-            } catch (NullPointerException p) {
-                System.out.println("pllllll");
+            } catch (IOException ioEx) {
+                System.out.println(ioEx.getMessage());
+                ioEx.printStackTrace();
+            } catch (ClassNotFoundException classEx) {
+                System.out.println(classEx.getMessage());
+                classEx.printStackTrace();
+            } catch (NullPointerException ex) {
+                System.out.println(ex.getMessage());
+                ex.printStackTrace();
             }
-
         }
 
     public int getLedToLight() {

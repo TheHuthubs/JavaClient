@@ -3,11 +3,7 @@ package infra;
 import java.io.IOException;
 import java.net.Socket;
 
-/**
- * Created by eldadyaakobi on 9/28/17.
- */
 public class Connection implements IConnection {
-
 
     private String host;
     private int port;
