@@ -1,6 +1,7 @@
 package LedActions;
 
 import infra.Connection;
+import infra.MessageUtil;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -20,9 +21,9 @@ public class LightLeds implements ILightLeds {
         this.connection = new Connection(HOST, PORT);
         this.connection.openSocket();
 
-        System.out.println("[Client -> Server] Sending: You would like to light led number " + numberOfLedsToLight);
+        System.out.println(MessageUtil.CLIENT_TO_SERVER_NUMBER_LED_TO_LIGHT + numberOfLedsToLight);
         String returnedMessageFromServer = this.sendMessageToServer();
-        System.out.println("[Server -> Client] receiving: Led to turn on: " + returnedMessageFromServer);
+        System.out.println(MessageUtil.SERVER_TO_CLINET_LED_TO_LIGHT + returnedMessageFromServer);
     }
 
     public String sendMessageToServer() {
