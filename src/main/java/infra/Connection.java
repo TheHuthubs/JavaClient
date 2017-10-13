@@ -3,11 +3,7 @@ package infra;
 import java.io.IOException;
 import java.net.Socket;
 
-/**
- * Created by eldadyaakobi on 9/28/17.
- */
 public class Connection implements IConnection {
-
 
     private String host;
     private int port;
@@ -20,11 +16,11 @@ public class Connection implements IConnection {
 
     public void openSocket() {
         try {
-            System.out.println("[connecting to socket...]");
+            System.out.println(MessageUtil.CONNECTING_TO_SOCKET);
             this.socket = new Socket(host, port);
 
         } catch (IOException e) {
-            System.out.println("Unable to connect to socket, please verify that server is up...");
+            System.out.println(MessageUtil.UNABLE_TO_CONNET_TO_SOCKET);
         }
     }
 

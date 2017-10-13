@@ -1,6 +1,7 @@
 package graphicInterface;
 
 import LedActions.LightLeds;
+import infra.MessageUtil;
 import parsers.LedsActionParser;
 
 import javax.swing.*;
@@ -15,7 +16,6 @@ public class MainFrame extends LedsActionParser implements ActionListener
 {
     public JTextField commandTextField = new JTextField(15);
 
-    TextField text = new TextField(20);
     private LightLeds lightLeds = new LightLeds();
     private int ledToLight;
 
@@ -25,13 +25,13 @@ public class MainFrame extends LedsActionParser implements ActionListener
 
     public void createMainFrame() {
 
-        JFrame frame = new JFrame("Welcome to Arduino led sever application");
-        JLabel mainLable = new JLabel("Arduino led server application");
-        JLabel commandLable  = new JLabel("Which led number would you like to turn on, bitch? :");
+        JFrame frame = new JFrame(MessageUtil.WELCOME_TO_ARDUINO);
+        JLabel mainLable = new JLabel(MessageUtil.ARDUINO_LED_SERVER_APP);
+        JLabel commandLable  = new JLabel(MessageUtil.WHICH_LED_TO_LIGHT);
         Font mainLableFont = new Font("Courier", Font.BOLD ,40);
         Font commandLineFont = new Font("Courier", Font.BOLD,25);
         JPanel buttonPanel = new JPanel(new GridBagLayout());
-        JButton sendButton = new JButton("Send to arduino");
+        JButton sendButton = new JButton(MessageUtil.SEND_TO_ARDUINO);
 
         GridBagConstraints constraints = new GridBagConstraints();
 
@@ -92,18 +92,20 @@ public class MainFrame extends LedsActionParser implements ActionListener
 
     }
 
-        public void actionPerformed(ActionEvent e) {
+        public void actionPerformed(ActionEvent actionEvent) {
             lightLeds.setNumberOfLedsToLight(getLedNumberToTurnOn(commandTextField));
             try {
                 lightLeds.createClient();
-            } catch (IOException e1) {
-                System.out.println("The mother fucker is not working");
-            } catch (ClassNotFoundException e1) {
-                e1.printStackTrace();
-            } catch (NullPointerException p) {
-                System.out.println("pllllll");
+            } catch (IOException ioEx) {
+                System.out.println(ioEx.getMessage());
+                ioEx.printStackTrace();
+            } catch (ClassNotFoundException classEx) {
+                System.out.println(classEx.getMessage());
+                classEx.printStackTrace();
+            } catch (NullPointerException ex) {
+                System.out.println(ex.getMessage());
+                ex.printStackTrace();
             }
-
         }
 
     public int getLedToLight() {
