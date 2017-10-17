@@ -1,4 +1,4 @@
-package LedActions;
+package ledActions;
 
 import infra.Connection;
 import infra.MessageUtil;

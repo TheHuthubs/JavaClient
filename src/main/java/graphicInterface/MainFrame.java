@@ -1,6 +1,6 @@
 package graphicInterface;
 
-import LedActions.LightLeds;
+import ledActions.LightLeds;
 import utils.Cracker;
 import utils.MessageUtil;
 
@@ -78,7 +78,6 @@ public class MainFrame
         constraints.gridx = 0;
         constraints.gridy = 2;
         ledCheckBox10.addItemListener(new ItemListener() {
-            @Override
             public void itemStateChanged(ItemEvent checkBoxEvent) {
                 try {
                     ledChackBoxStateChanged(checkBoxEvent);
@@ -95,7 +94,6 @@ public class MainFrame
         constraints.gridx = 0;
         constraints.gridy = 3;
         ledCheckBox11.addItemListener(new ItemListener() {
-            @Override
             public void itemStateChanged(ItemEvent checkBoxEvent) {
                 try {
                     ledChackBoxStateChanged(checkBoxEvent);
@@ -112,7 +110,6 @@ public class MainFrame
         constraints.gridx = 0;
         constraints.gridy = 4;
         ledCheckBox12.addItemListener(new ItemListener() {
-            @Override
             public void itemStateChanged(ItemEvent checkBoxEvent) {
                 try {
                     ledChackBoxStateChanged(checkBoxEvent);
@@ -129,7 +126,6 @@ public class MainFrame
         constraints.gridx = 0;
         constraints.gridy = 5;
             ledCheckBox13.addItemListener(new ItemListener() {
-                @Override
                 public void itemStateChanged(ItemEvent checkBoxEvent) {
                     try {
                         ledChackBoxStateChanged(checkBoxEvent);
@@ -152,15 +148,18 @@ public class MainFrame
         Object ledSource = e.getItemSelectable();
         for (int ledNumber = 0; ledNumber < 4; ledNumber++ ) {
 
-            if (ledSource == ledsArray[ledNumber]) {
-                // turn on led
-                if (e.getStateChange() == ItemEvent.SELECTED) {
-//                    lightLeds.setNumberOfLedsToLight(Cracker.getLedNumberToTurnOn(ledCheckBox10));
-//                    lightLeds.createClient();
-                    System.out.println("turn on led: " + Cracker.getLedNumberToTurnOn(ledsArray[ledNumber]));
-                } else {
-                    // turn off led
-                    System.out.println("turn off led: " + Cracker.getLedNumberToTurnOn(ledsArray[ledNumber]));
+            if (ledSource == ledsArray[ledNumber])
+            {
+                // SELECTED - turn on led
+                if (e.getStateChange() == ItemEvent.SELECTED)
+                {
+                    lightLeds.setNumberOfLedsToLight(Cracker.getLedNumberToTurnOn(ledsArray[ledNumber]));
+                    lightLeds.createClient();
+                }
+                else // DESELECTED - turn off led
+                {
+                lightLeds.setNumberOfLedsToLight(Cracker.getLedNumberToTurnOff(ledsArray[ledNumber]));
+                lightLeds.createClient();
                 }
             }
         }
