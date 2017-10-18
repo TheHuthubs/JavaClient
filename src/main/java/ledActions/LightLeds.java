@@ -1,5 +1,6 @@
 package ledActions;
 
+import configuration.ConfigurationUtility;
 import infra.Connection;
 import infra.MessageUtil;
 
@@ -7,18 +8,24 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.util.Properties;
 
-public class LightLeds implements ILightLeds {
+public class LightLeds extends ConfigurationUtility implements ILightLeds {
 
-    private static final String HOST = "127.0.0.1";
-    private static final int PORT = 6969;
+    private final static String HOST = "server.connectHosts";
+    private final static String PORT = "server.connectPort";
     private Connection connection = null;
     private int numberOfLedsToLight = 0;
 
 
+    private String getClientProperties(String property)
+    {
+        return loadProperties(property);
+    }
+
     public void createClient() throws IOException, ClassNotFoundException {
         // creating TCP connection with the server
-        this.connection = new Connection(HOST, PORT);
+        this.connection = new Connection(getClientProperties(HOST), Integer.parseInt(getClientProperties(PORT)));
         this.connection.openSocket();
 
         System.out.println(MessageUtil.CLIENT_TO_SERVER_NUMBER_LED_TO_LIGHT + numberOfLedsToLight);
