@@ -1,3 +1,4 @@
+import configuration.ConfigurationUtility;
 import graphicInterface.MainFrame;
 
 public class LedApp {
@@ -6,9 +7,8 @@ public class LedApp {
         MainFrame mainFrame = new MainFrame();
     }
 
+
     public static void main(String[] args) {
-
         LedApp app = new LedApp();
-
     }
 }
